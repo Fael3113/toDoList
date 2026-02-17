@@ -19,10 +19,16 @@ public class TaskController {
 	}
 
 	@GetMapping("/verTask")
-	public ResponseEntity view(TaskModel taskModel, HttpServletRequest request){
-		var idUser = request.getAttribute("idUser");
-		var taskView = this.taskRepository.findByIdUser((UUID) idUser);
-		return ResponseEntity.status(HttpStatus.FOUND).body(taskView);
+	public ResponseEntity view(HttpServletRequest request){
+		var idUser = (UUID) request.getAttribute("idUser");
+
+		var tasksView = this.taskRepository.findByIdUser(idUser);
+		if (tasksView.isEmpty()){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Não há nenhuma tarefa");
+		}
+
+		return ResponseEntity.ok(tasksView);
 	}
 
 	@PostMapping("/criarTask")
