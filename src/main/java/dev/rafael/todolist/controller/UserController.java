@@ -1,6 +1,9 @@
-package dev.rafael.todolist.user;
+package dev.rafael.todolist.controller;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import dev.rafael.todolist.model.UserModel;
+import dev.rafael.todolist.repository.UserRepository;
+import dev.rafael.todolist.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,31 +17,22 @@ public class UserController {
 	private IUserRepository userRepository;
 */
 	//Boa Prática:
-	private final UserRepository userRepository;
+	private final UserService userService;
 
-	public UserController(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 
 	@GetMapping("/verUser")
 	public ResponseEntity view(UserModel userModel){
-		var userView = this.userRepository.findAll();
+		var userView = this.userService.listar();
 		return ResponseEntity.status(HttpStatus.FOUND).body(userView);
 	}
 
 	@PostMapping("/criarUser")
 	//@RequestBody é um indicativo para entrada de dados no compartimento body do postman
 	public ResponseEntity create(@RequestBody UserModel userModel){
-		var user = this.userRepository.findByUsername(userModel.getUsername());
-
-		if (user != null){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existe");
-		}
-
-		var passwordHashred = BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
-		userModel.setPassword(passwordHashred);
-
-		var userCreated = this.userRepository.save(userModel);
+		var userCreated = this.userService.createUser(userModel);
 		return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
 	}
 }

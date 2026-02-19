@@ -1,5 +1,6 @@
-package dev.rafael.todolist.user;
+package dev.rafael.todolist.repository;
 
+import dev.rafael.todolist.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

@@ -1,7 +1,7 @@
-package dev.rafael.todolist.filter;
+package dev.rafael.todolist.auth;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import dev.rafael.todolist.user.UserRepository;
+import dev.rafael.todolist.repository.UserRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,5 +1,6 @@
-package dev.rafael.todolist.task;
+package dev.rafael.todolist.repository;
 
+import dev.rafael.todolist.model.TaskModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
