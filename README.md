@@ -94,6 +94,7 @@ A aplicação foi deployada com sucesso no Render utilizando Docker. Os principa
 O Spring Boot, por padrão e como boa prática em produção, não realiza alterações estruturais em bancos de dados já existentes (como adicionar constraints `UNIQUE`). Para modificações desse tipo, é necessário:
 - Dropar e recriar a tabela via Spring Boot, ou
 - Realizar alterações manualmente através do gerenciador do banco de dados (ex: pgAdmin para PostgreSQL)
+- O application.properties está lendo as variáveis de ambiente (definidas na própria IDE ou pelo local onde a aplicação executar, como o site Render), para testes de mvn clean install/Docker local, declare as variáveis diretamente (ou defina um valor padrão que convirja com o da variável de ambiente), do contrário, não funcionará.
 
 ## Endpoints da API
 
