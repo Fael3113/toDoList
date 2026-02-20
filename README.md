@@ -100,7 +100,7 @@ O Spring Boot, por padrão e como boa prática em produção, não realiza alter
 
 ### Usuários
 - `POST /users/criarUser` - Criar novo usuário
-- `GET /users/verUser` - Ver todos os usuários
+- `GET /users/verUser` - Ver informações do usuário autenticado
 
 ### Tarefas
 - `GET /tasks/verTask` - Visualizar tasks do usuário autenticado
