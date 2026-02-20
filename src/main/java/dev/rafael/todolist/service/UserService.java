@@ -4,9 +4,11 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import dev.rafael.todolist.exceptions.UserAlreadyExistsException;
 import dev.rafael.todolist.model.UserModel;
 import dev.rafael.todolist.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -29,7 +31,8 @@ public class UserService {
 		return this.userRepository.save(userModel);
 	}
 
-	public List<UserModel> listar(){
-		return this.userRepository.findAll();
+	public UserModel listar(HttpServletRequest request){
+		var idUser = (UUID) request.getAttribute("idUser");
+		return this.userRepository.findById(idUser).orElse(null);
 	}
 }
